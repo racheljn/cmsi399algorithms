@@ -1,0 +1,32 @@
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var frequencySort = function(s) {   
+    let charMap = new Map();
+    
+    for (let i = 0; i < s.length; i++) {
+        let currentChar = s.charAt(i);
+        if (charMap.has(currentChar)) {
+            charMap.set(currentChar, charMap.get(currentChar)+1);
+        } else {
+            charMap.set(currentChar, 1);
+        }
+    }
+
+    const mapSort = new Map([...charMap.entries()].sort((a, b) => b[1] - a[1]));
+    
+    s = "";
+    
+    for (let key of mapSort.keys()) {
+        let val = mapSort.get(key);
+
+        while (val > 0) {
+            s+=key;
+            val -= 1;
+            mapSort.set(key, val);
+        }
+    }
+
+    return s;
+};
