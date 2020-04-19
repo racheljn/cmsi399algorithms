@@ -1,0 +1,25 @@
+/**
+ * @param {string} s
+ * @return {boolean}
+ * Referenced https://medium.com/@paulrohan/parenthesis-matching-problem-in-javascript-the-hacking-school-hyd-      7d7708278911
+ */
+var isValid = function(s) {
+    let parens = {'(': ')', '{':'}', '[':']'};
+    let closedParens = {')': true, '}': true, ']': true};
+    let stack = [];
+    
+    for (let i = 0; i < s.length; i++) {
+        let currentChar = s.charAt(i);
+        
+        if (currentChar in parens) {
+            stack.push(currentChar);
+        } else if (currentChar in closedParens) {
+            if (currentChar !== parens[stack.pop()]) {
+                return false;
+            }
+        }
+    }
+    
+      return stack.length === 0;
+
+};
